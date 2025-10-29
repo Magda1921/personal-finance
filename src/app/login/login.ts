@@ -14,7 +14,7 @@ import { Input } from '../form/input/input';
   styleUrl: './login.scss',
 })
 export class Login {
-  form: FormGroup = new FormGroup({
+  form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });

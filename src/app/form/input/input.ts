@@ -8,7 +8,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './input.scss',
 })
 export class Input {
-  control = input<FormControl>();
+  control = input.required<FormControl>();
   placeholder = input<string>();
   type = input<string>();
 }
