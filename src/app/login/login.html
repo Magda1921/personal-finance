@@ -1,9 +1,11 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <app-input [control]="form.controls.email" type="text" placeholder="Email" />
+  <label for="email">Email</label>
+  <app-input [control]="form.controls.email" type="email" placeholder="Email" />
+  <label for="password">Password</label>
   <app-input
     [control]="form.controls.password"
     type="password"
     placeholder="Password"
   />
-  <button type="submit">Login</button>
+  <button type="submit" [disabled]="sending || form.invalid">Login</button>
 </form>

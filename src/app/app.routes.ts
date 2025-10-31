@@ -1,11 +1,9 @@
 import { Routes } from '@angular/router';
-import { Login } from './login/login';
+import { LoginPage } from './login/login';
 import { PATHS } from '../constants/paths';
+import { PageNotFoundComponent } from './page-not-found-component/page-not-found-component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: Login,
-    pathMatch: 'full',
-  },
+  { path: PATHS.LOGIN, component: LoginPage },
+  { path: '**', component: PageNotFoundComponent },
 ];

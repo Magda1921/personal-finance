@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Input } from '../form/input/input';
+import { AuthService } from '../service/auth-response';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -13,17 +15,28 @@ import { Input } from '../form/input/input';
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
-export class Login {
+export class LoginPage {
+  constructor(private auth: AuthService) {}
+  sending: boolean = false;
+
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
   onSubmit() {
-    if (this.form.valid) {
-      const email = this.form.value.email;
-      const password = this.form.value.password;
-      console.log('Email:', email);
-      console.log('Password:', password);
-    }
+    if (!this.form.valid || this.sending) return;
+    this.sending = true;
+    const { email, password } = this.form.value;
+    this.auth
+      .login(email!, password!)
+      .pipe(finalize(() => (this.sending = false)))
+      .subscribe({
+        next: (res) => {
+          console.log('Login successful:', res);
+        },
+        error: (err) => {
+          console.error('Login failed', err);
+        },
+      });
   }
 }
