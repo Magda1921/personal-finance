@@ -2740,9 +2740,9 @@ body {
   align-items: flex-start;
   justify-content: flex-start;
   min-height: 100vh;
-  font-family: "Inter", sans-serif;
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: linear-gradient(135deg, #f0f4ff, #e6f0ff);
-  color: #1e293b;
+  color: #0f1720;
   display: flex;
 }
 @media (min-width: 768px) {

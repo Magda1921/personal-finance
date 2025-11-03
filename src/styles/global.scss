@@ -12,7 +12,7 @@ body {
   align-items: flex-start;
   justify-content: flex-start;
   min-height: 100vh;
-  font-family: "Inter", sans-serif;
+  font-family: variables.$font;
   background: linear-gradient(
     135deg,
     variables.$color-bg-gradient-start,

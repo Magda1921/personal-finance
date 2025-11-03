@@ -18,6 +18,7 @@ import { finalize } from 'rxjs';
 export class LoginPage {
   constructor(private auth: AuthService) {}
   sending: boolean = false;
+  errorMessage: string = '';
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -35,7 +36,7 @@ export class LoginPage {
           console.log('Login successful:', res);
         },
         error: (err) => {
-          console.error('Login failed', err);
+          this.errorMessage = 'Login failed. Please check your credentials.';
         },
       });
   }
