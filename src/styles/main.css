@@ -2729,6 +2729,30 @@
   font-weight: 800;
 }
 
+.br-sm {
+  border-radius: 2px;
+}
+
+.br-md {
+  border-radius: 4px;
+}
+
+.br-lg {
+  border-radius: 8px;
+}
+
+.br-xl {
+  border-radius: 16px;
+}
+
+.br-2xl {
+  border-radius: 24px;
+}
+
+.br-3xl {
+  border-radius: 32px;
+}
+
 *,
 *::before,
 *::after {
@@ -2740,9 +2764,9 @@ body {
   align-items: flex-start;
   justify-content: flex-start;
   min-height: 100vh;
-  font-family: "Inter", sans-serif;
-  background: linear-gradient(135deg, #f0f4ff, #e6f0ff);
-  color: #1e293b;
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(135deg, #f3fbf6, #e6f5ee);
+  color: #0f1720;
   display: flex;
 }
 @media (min-width: 768px) {
@@ -2799,6 +2823,6 @@ select {
 }
 input:focus,
 select:focus {
-  border-color: #3b82f6;
+  border-color: #2b9f6e;
   outline: none;
 }/*# sourceMappingURL=main.css.map */

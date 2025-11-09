@@ -1,0 +1,49 @@
+@use "variables";
+@use "sass:map";
+
+:host {
+  display: block;
+  width: 100%;
+  font-family: variables.$font;
+  color: variables.$color-text-primary;
+}
+
+input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: map.get(variables.$spacing, "8");
+  background: variables.$color-input-bg;
+  border: 1px solid variables.$color-border;
+  color: variables.$color-text-primary;
+  font-size: 0.96rem;
+  line-height: 1.25;
+  transition: box-shadow 160ms ease, border-color 160ms ease,
+    transform 120ms ease;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input::placeholder {
+  color: rgba(variables.$color-text-primary, 0.5);
+}
+
+input:focus {
+  border-color: variables.$color-primary;
+  box-shadow: 0 8px 20px rgba(variables.$color-primary, 0.08);
+}
+
+input:disabled,
+:host([disabled]) input {
+  opacity: 0.65;
+  cursor: not-allowed;
+  background: variables.$color-input-bg, 2%;
+  box-shadow: none;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: variables.$error-red;
+  box-shadow: 0 6px 12px rgba(variables.$error-red, 0.06);
+}
