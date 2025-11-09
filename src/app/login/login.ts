@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Input } from '../form/input/input';
 import { AuthService } from '../service/auth-response';
-import { finalize } from 'rxjs';
+import { finalize, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -17,26 +17,40 @@ import { finalize } from 'rxjs';
 })
 export class LoginPage {
   constructor(private auth: AuthService) {}
-  sending: boolean = false;
-  errorMessage: string = '';
+  private destroy$ = new Subject<void>();
+  sending = signal<boolean>(false);
+  errorMessage = signal<string>('');
+  showPassword = signal<boolean>(false);
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
   onSubmit() {
-    if (!this.form.valid || this.sending) return;
-    this.sending = true;
+    if (!this.form.valid || this.sending()) return;
+    this.sending.set(true);
     const { email, password } = this.form.value;
+    if (!email || !password) {
+      this.sending.set(false);
+      return;
+    }
     this.auth
-      .login(email!, password!)
-      .pipe(finalize(() => (this.sending = false)))
+      .login(email, password)
+      .pipe(
+        finalize(() => this.sending.set(false)),
+        takeUntil(this.destroy$)
+      )
       .subscribe({
         next: (res) => {
           console.log('Login successful:', res);
         },
         error: (err) => {
-          this.errorMessage = 'Login failed. Please check your credentials.';
+          this.errorMessage.set('Login failed. Please check your credentials.');
         },
       });
   }

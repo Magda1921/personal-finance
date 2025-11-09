@@ -1,4 +1,5 @@
 @use "variables";
+@use "sass:map";
 
 :host {
   display: flex;
@@ -19,8 +20,8 @@
 form {
   width: 100%;
   max-width: 520px;
-  background: #ffffff;
-  border-radius: 12px;
+  background: variables.$color-white;
+  border-radius: map.get(variables.$spacing, "8");
   padding: 2rem;
   box-shadow: 0 14px 40px rgba(15, 23, 32, 0.06);
   border: 1px solid rgba(0, 0, 0, 0.04);
@@ -42,10 +43,10 @@ button[type="submit"] {
     variables.$color-primary 0%,
     variables.$color-primary-hover 100%
   );
-  color: #fff;
-  font-weight: 700;
+  color: variables.$color-white;
+  font-weight: map.get(variables.$font-weight, "700");
   border: none;
-  border-radius: 10px;
+  border-radius: map.get(variables.$spacing, "8");
   cursor: pointer;
   box-shadow: 0 8px 20px rgba(variables.$color-primary-hover, 0.12);
   transition: transform 120ms ease, opacity 120ms ease;
@@ -61,12 +62,10 @@ button[type="submit"]:disabled {
   box-shadow: none;
 }
 .error-box {
-  margin-top: 15px;
-  padding: 10px;
-  background-color: #ffe6e6;
-  border: 1px solid #ffb3b3;
-  color: #d32f2f;
-  border-radius: 6px;
+  background-color: variables.$color-error-bg;
+  border: 1px solid variables.$color-error-border;
+  color: variables.$error-red;
+  border-radius: map.get(variables.$spacing, "8");
   text-align: center;
 }
 .login-container {
@@ -74,4 +73,28 @@ button[type="submit"]:disabled {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.input-wrapper button {
+  position: absolute;
+  top: 50%;
+  right: map.get(variables.$spacing, "8");
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-wrapper button svg {
+  display: block;
 }

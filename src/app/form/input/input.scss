@@ -1,4 +1,5 @@
 @use "variables";
+@use "sass:map";
 
 :host {
   display: block;
@@ -11,7 +12,7 @@ input {
   box-sizing: border-box;
   width: 100%;
   padding: 0.85rem 1rem;
-  border-radius: 8px;
+  border-radius: map.get(variables.$spacing, "8");
   background: variables.$color-input-bg;
   border: 1px solid variables.$color-border;
   color: variables.$color-text-primary;
@@ -32,7 +33,6 @@ input::placeholder {
 input:focus {
   border-color: variables.$color-primary;
   box-shadow: 0 8px 20px rgba(variables.$color-primary, 0.08);
-  transform: translateY(-1px);
 }
 
 input:disabled,
@@ -44,6 +44,6 @@ input:disabled,
 }
 
 input.ng-invalid.ng-touched {
-  border-color: #e02424;
-  box-shadow: 0 6px 12px rgba(#e02424, 0.06);
+  border-color: variables.$error-red;
+  box-shadow: 0 6px 12px rgba(variables.$error-red, 0.06);
 }
