@@ -1,0 +1,65 @@
+@use "sass:map";
+@use "variables";
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: variables.$color-bg-gradient-end;
+  box-shadow: 0 4px 18px rgba(15, 23, 32, 0.08);
+  font-family: variables.$font;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  .logo {
+    font-weight: map.get(variables.$font-weight, "700");
+    letter-spacing: 0.5px;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: map.get(variables.$font-weight, "500");
+    transition: color 0.2s ease, transform 0.15s ease;
+    cursor: pointer;
+    &:hover {
+      color: variables.$color-primary;
+    }
+    &.active {
+      color: variables.$color-primary-hover;
+      border-bottom: 2px solid variables.$color-primary-hover;
+      padding-bottom: 2px;
+    }
+  }
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  button {
+    padding: 0.6rem 1.2rem;
+    background: linear-gradient(
+      90deg,
+      variables.$color-primary 0%,
+      variables.$color-primary-hover 100%
+    );
+    color: variables.$color-white;
+    border: none;
+    border-radius: map.get(variables.$spacing, "8");
+    cursor: pointer;
+    font-weight: map.get(variables.$font-weight, "600");
+    box-shadow: 0 4px 12px rgba(variables.$color-primary-hover, 0.15);
+    transition: transform 120ms ease, opacity 120ms ease;
+  }
+}
