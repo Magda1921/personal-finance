@@ -8,6 +8,8 @@ import {
 import { Input } from '../form/input/input';
 import { AuthService } from '../service/auth-response';
 import { finalize, Subject, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
+import { PATHS } from '../../constants/paths';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,7 @@ import { finalize, Subject, takeUntil } from 'rxjs';
   styleUrl: './login.scss',
 })
 export class LoginPage {
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
   private destroy$ = new Subject<void>();
   sending = signal<boolean>(false);
   errorMessage = signal<string>('');
@@ -47,6 +49,7 @@ export class LoginPage {
       )
       .subscribe({
         next: (res) => {
+          this.router.navigateByUrl(PATHS.DASHBOARD);
           console.log('Login successful:', res);
         },
         error: (err) => {
